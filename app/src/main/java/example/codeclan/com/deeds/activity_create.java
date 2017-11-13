@@ -6,13 +6,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import org.w3c.dom.Text;
 
 public class activity_create extends AppCompatActivity {
 
     EditText nameText;
-    EditText completeText;
+    RadioGroup completeButton;
     DBHelper dbHelper;
 
     @Override
@@ -20,13 +22,20 @@ public class activity_create extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         nameText = (EditText)findViewById(R.id.nameEdit);
-        completeText = (EditText)findViewById(R.id.completeEdit);
+        completeButton = (RadioGroup)findViewById(R.id.isComplete);
     }
 
     public void saveNewDeed(View button){
         dbHelper = new DBHelper(this);
         String name = nameText.getText().toString();
-        String complete = completeText.getText().toString();
+        String complete = "";
+        Integer rb = completeButton.getCheckedRadioButtonId();
+        if (rb == findViewById(R.id.done).getId()){
+            complete = "true";
+        }
+        else {
+            complete = "false";
+        }
         Deed deed = new Deed(name, complete);
         deed.save(dbHelper);
         Intent i = new Intent(this, menu_activity.class);
