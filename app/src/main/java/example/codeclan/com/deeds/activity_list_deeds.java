@@ -32,13 +32,13 @@ public class activity_list_deeds extends AppCompatActivity {
                 case "done":
                     deedList = Deed.allComplete(dbHelper);
                     break;
-//                case "not done":
-//                    deedList = Deed.allNotComplete(dbHelper);
-//                    break;
-//                case "date":
-//                    String selectedDate = extras.getString("selectedDate");
-//                    deedList = Deed.getByDate(dbHelper, selectedDate);
-//                    break;
+                case "not done":
+                    deedList = Deed.allNotComplete(dbHelper);
+                    break;
+                case "date":
+                    String selectedDate = extras.getString("selectedDate");
+                    deedList = Deed.getByDate(dbHelper, selectedDate);
+                    break;
                 case "all":
                     deedList = Deed.all(dbHelper);
                     break;

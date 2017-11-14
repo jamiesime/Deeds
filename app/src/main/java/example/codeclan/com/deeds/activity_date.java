@@ -55,6 +55,12 @@ public class activity_date extends AppCompatActivity {
             i.putExtra("deedDetails", deedDetails);
             startActivity(i);
         }
+        if (nextIntent.equals("filter")){
+            Intent i = new Intent(this, activity_list_deeds.class);
+            i.putExtra("listMode", "date");
+            i.putExtra("selectedDate", selectedDate);
+            startActivity(i);
+        }
 
     }
 }
