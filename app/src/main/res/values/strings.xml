@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Deeds</string>
+    <string name="list_title">all deeds</string>
 </resources>

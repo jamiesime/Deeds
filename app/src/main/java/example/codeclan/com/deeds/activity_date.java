@@ -18,6 +18,7 @@ public class activity_date extends AppCompatActivity {
     private String deedDetails;
     private String nextIntent;
     private Integer id;
+    private String listMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class activity_date extends AppCompatActivity {
         deedDetails = extras.getString("deedDetails");
         id = extras.getInt("id");
         nextIntent = extras.getString("nextIntent");
+        listMode = extras.getString("listMode");
 
 
 
@@ -42,6 +44,7 @@ public class activity_date extends AppCompatActivity {
         String selectedDate = day.toString() + "-" + month.toString() + "-" + year.toString();
         if (nextIntent.equals("edit")) {
             Intent i = new Intent(this, activity_edit.class);
+            i.putExtra("listMode", listMode);
             i.putExtra("deedDate", selectedDate);
             i.putExtra("deedName", deedName);
             i.putExtra("deedDetails", deedDetails);

@@ -74,6 +74,7 @@ public class activity_edit extends AppCompatActivity {
         i.putExtra("deedDetails", detailsText.getText().toString());
         i.putExtra("detailsName", detailsText.getText().toString());
         i.putExtra("id", id);
+        i.putExtra("listMode", listMode);
         i.putExtra("nextIntent", "edit");
         startActivity(i);
     }

@@ -27,20 +27,24 @@ public class activity_list_deeds extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("listMode")){
             Bundle extras = intent.getExtras();
-            thisList = extras.getString("listMode");
-            switch (extras.getString("listMode")){
+            String listType = extras.getString("listMode");
+            switch (listType){
                 case "done":
                     deedList = Deed.allComplete(dbHelper);
+                    thisList = "done";
                     break;
                 case "not done":
                     deedList = Deed.allNotComplete(dbHelper);
+                    thisList = "not done";
                     break;
                 case "date":
                     String selectedDate = extras.getString("selectedDate");
                     deedList = Deed.getByDate(dbHelper, selectedDate);
+                    thisList = "date";
                     break;
                 case "all":
                     deedList = Deed.all(dbHelper);
+                    thisList = "all";
                     break;
             }
         }
