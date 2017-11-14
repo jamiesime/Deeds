@@ -9,11 +9,15 @@ import android.widget.DatePicker;
 import java.text.DateFormat;
 import java.util.Date;
 
+import static android.R.attr.id;
+
 public class activity_date extends AppCompatActivity {
 
     private DatePicker datePicker;
     private String deedName;
     private String deedDetails;
+    private String nextIntent;
+    private Integer id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,9 @@ public class activity_date extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         deedName = extras.getString("deedName");
         deedDetails = extras.getString("deedDetails");
+        id = extras.getInt("id");
+        nextIntent = extras.getString("nextIntent");
+
 
 
         datePicker = (DatePicker)findViewById(R.id.date_picker);
@@ -33,10 +40,21 @@ public class activity_date extends AppCompatActivity {
         Integer month = (datePicker.getMonth() + 1);
         Integer day = datePicker.getDayOfMonth();
         String selectedDate = day.toString() + "-" + month.toString() + "-" + year.toString();
-        Intent i = new Intent(this, activity_create.class);
-        i.putExtra("dateInput", selectedDate);
-        i.putExtra("deedName", deedName);
-        i.putExtra("deedDetails", deedDetails);
-        startActivity(i);
+        if (nextIntent.equals("edit")) {
+            Intent i = new Intent(this, activity_edit.class);
+            i.putExtra("deedDate", selectedDate);
+            i.putExtra("deedName", deedName);
+            i.putExtra("deedDetails", deedDetails);
+            i.putExtra("id", id);
+            startActivity(i);
+        }
+        else {
+            Intent i = new Intent(this, activity_create.class);
+            i.putExtra("dateDate", selectedDate);
+            i.putExtra("deedName", deedName);
+            i.putExtra("deedDetails", deedDetails);
+            startActivity(i);
+        }
+
     }
 }

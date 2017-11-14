@@ -35,7 +35,7 @@ public class activity_create extends AppCompatActivity {
             if (!extras.getString("deedName").equals(null)) {
                 nameText.setText(extras.getString("deedName"));
                 detailsText.setText(extras.getString("deedDetails"));
-                selectedDate.setText(extras.getString("dateInput"));
+                selectedDate.setText(extras.getString("deedDate"));
             }
         }
     }
@@ -63,6 +63,7 @@ public class activity_create extends AppCompatActivity {
         Intent i = new Intent(this, activity_date.class);
         i.putExtra("deedName", nameText.getText().toString());
         i.putExtra("detailsName", detailsText.getText().toString());
+        i.putExtra("nextIntent", "create");
         startActivity(i);
     }
 

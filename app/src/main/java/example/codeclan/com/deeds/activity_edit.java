@@ -22,7 +22,7 @@ public class activity_edit extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.activity_edit);
         nameText = (EditText)findViewById(R.id.nameEdit);
         selectedDate = (TextView)findViewById(R.id.selected_date);
         completeButton = (RadioGroup)findViewById(R.id.isComplete);
@@ -30,10 +30,11 @@ public class activity_edit extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        id = Integer.parseInt(extras.getString("id"));
+        id = extras.getInt("id");
         nameText.setText(extras.getString("deedName"));
         detailsText.setText(extras.getString("deedDetails"));
-        selectedDate.setText(extras.getString("dateInput"));
+        selectedDate.setText(extras.getString("deedDate"));
+
 
     }
 
@@ -51,12 +52,13 @@ public class activity_edit extends AppCompatActivity {
             complete = "not done";
         }
         Deed deed = new Deed(name, date, details, complete);
-        deed.save(dbHelper);
-        Intent i = new Intent(this, menu_activity.class);
+        deed.update(dbHelper, id);
+        Intent i = new Intent(this, activity_list_deeds.class);
         startActivity(i);
     }
 
     public void deleteDeed(View button){
+        dbHelper = new DBHelper(this);
         Deed.delete(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         startActivity(i);
@@ -65,7 +67,10 @@ public class activity_edit extends AppCompatActivity {
     public void goToDatePicker(View button){
         Intent i = new Intent(this, activity_date.class);
         i.putExtra("deedName", nameText.getText().toString());
+        i.putExtra("deedDetails", detailsText.getText().toString());
         i.putExtra("detailsName", detailsText.getText().toString());
+        i.putExtra("id", id);
+        i.putExtra("nextIntent", "edit");
         startActivity(i);
     }
 

@@ -53,6 +53,10 @@ public class Deed {
         return details;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getComplete() {
         return complete;
     }
@@ -65,9 +69,20 @@ public class Deed {
         cv.put(DEEDS_COLUMN_DETAILS, this.details);
         cv.put(DEEDS_COLUMN_COMPLETE, this.complete);
         db.insert(DEEDS_TABLE_NAME, null, cv);
-
         return true;
     }
+
+    public boolean update(DBHelper dbHelper, Integer id){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DEEDS_COLUMN_NAME, this.name);
+        cv.put(DEEDS_COLUMN_DATE, this.date);
+        cv.put(DEEDS_COLUMN_DETAILS, this.details);
+        cv.put(DEEDS_COLUMN_COMPLETE, this.complete);
+        db.update(DEEDS_TABLE_NAME, cv, "id="+id, null);
+        return true;
+    }
+
 
     public static ArrayList<Deed> all(DBHelper dbHelper){
         ArrayList<Deed> deeds = new ArrayList<>();
@@ -95,7 +110,7 @@ public class Deed {
 
     public static boolean delete(DBHelper dbHelper, Integer id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String selection = " id = ?";
+        String selection = " id= ?";
         String[] values = {id.toString()};
         db.delete(DEEDS_TABLE_NAME, selection, values);
         return true;
