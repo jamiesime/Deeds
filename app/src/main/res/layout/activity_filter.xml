@@ -139,7 +139,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
         android:onClick="byComplete"
-        android:text="by date"
+        android:text="by done"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

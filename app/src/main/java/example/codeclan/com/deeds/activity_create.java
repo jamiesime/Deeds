@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class activity_create extends AppCompatActivity {
+public class activity_create extends nav {
 
     EditText nameText;
     EditText detailsText;

@@ -11,7 +11,7 @@ import java.util.Date;
 
 import static android.R.attr.id;
 
-public class activity_date extends AppCompatActivity {
+public class activity_date extends nav {
 
     private DatePicker datePicker;
     private String deedName;
@@ -48,6 +48,7 @@ public class activity_date extends AppCompatActivity {
             i.putExtra("deedDate", selectedDate);
             i.putExtra("deedName", deedName);
             i.putExtra("deedDetails", deedDetails);
+            i.putExtra("selectedDate", selectedDate);
             i.putExtra("id", id);
             startActivity(i);
         }
@@ -60,7 +61,7 @@ public class activity_date extends AppCompatActivity {
         }
         if (nextIntent.equals("filter")){
             Intent i = new Intent(this, activity_list_deeds.class);
-            i.putExtra("listMode", "date");
+            i.putExtra("listMode", listMode);
             i.putExtra("selectedDate", selectedDate);
             startActivity(i);
         }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import static android.R.attr.id;
 
-public class activity_edit extends AppCompatActivity {
+public class activity_edit extends nav {
 
     EditText nameText;
     EditText detailsText;
@@ -19,6 +19,7 @@ public class activity_edit extends AppCompatActivity {
     DBHelper dbHelper;
     private Integer id;
     private String listMode;
+    private String dateToPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,11 @@ public class activity_edit extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         id = extras.getInt("id");
         listMode = extras.getString("listMode");
+        dateToPass = extras.getString("selectedDate");
         nameText.setText(extras.getString("deedName"));
         detailsText.setText(extras.getString("deedDetails"));
         selectedDate.setText(extras.getString("deedDate"));
+
 
 
     }
@@ -57,7 +60,7 @@ public class activity_edit extends AppCompatActivity {
         deed.update(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", listMode);
-        i.putExtra("selectedDate", date);
+        i.putExtra("selectedDate", dateToPass);
         i.putExtra("complete", complete);
         startActivity(i);
     }
@@ -67,6 +70,7 @@ public class activity_edit extends AppCompatActivity {
         Deed.delete(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", listMode);
+        i.putExtra("selectedDate", dateToPass);
         startActivity(i);
     }
 

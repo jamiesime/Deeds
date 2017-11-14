@@ -3,7 +3,7 @@ package example.codeclan.com.deeds;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class activity_info extends AppCompatActivity {
+public class activity_info extends nav {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

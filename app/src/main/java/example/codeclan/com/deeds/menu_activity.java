@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class menu_activity extends AppCompatActivity {
+public class menu_activity extends nav {
 
     DBHelper dbHelper;
 

@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class activity_list_deeds extends AppCompatActivity {
+public class activity_list_deeds extends nav {
 
     DBHelper dbHelper;
     ArrayList<Deed> deedList;

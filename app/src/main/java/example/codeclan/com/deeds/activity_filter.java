@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 
-public class activity_filter extends AppCompatActivity {
+public class activity_filter extends nav {
 
     private RadioGroup completeButton;
 
@@ -21,6 +21,7 @@ public class activity_filter extends AppCompatActivity {
     public void byDate(View button){
         Intent i = new Intent(this, activity_date.class);
         i.putExtra("nextIntent", "filter");
+        i.putExtra("listMode", "date");
         startActivity(i);
     }
 
