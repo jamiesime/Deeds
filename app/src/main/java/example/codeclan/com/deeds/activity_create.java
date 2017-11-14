@@ -32,12 +32,18 @@ public class activity_create extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("deedName")) {
             Bundle extras = intent.getExtras();
-            if (!extras.getString("deedName").equals(null)) {
-                nameText.setText(extras.getString("deedName"));
-                detailsText.setText(extras.getString("deedDetails"));
-                selectedDate.setText(extras.getString("deedDate"));
-            }
+            nameText.setText(extras.getString("deedName"));
         }
+        if (intent.hasExtra("deedDate")) {
+            Bundle extras = intent.getExtras();
+            selectedDate.setText(extras.getString("deedDate"));
+        }
+        if (intent.hasExtra("deedDetails")) {
+            Bundle extras = intent.getExtras();
+            detailsText.setText(extras.getString("deedDetails"));
+        }
+
+
     }
 
     public void saveNewDeed(View button){

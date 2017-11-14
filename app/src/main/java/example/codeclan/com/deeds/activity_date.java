@@ -48,9 +48,9 @@ public class activity_date extends AppCompatActivity {
             i.putExtra("id", id);
             startActivity(i);
         }
-        else {
+        if (nextIntent.equals("create")){
             Intent i = new Intent(this, activity_create.class);
-            i.putExtra("dateDate", selectedDate);
+            i.putExtra("deedDate", selectedDate);
             i.putExtra("deedName", deedName);
             i.putExtra("deedDetails", deedDetails);
             startActivity(i);

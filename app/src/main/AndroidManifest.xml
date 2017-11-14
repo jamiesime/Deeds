@@ -19,7 +19,8 @@
         <activity android:name=".activity_create" />
         <activity android:name=".activity_list_deeds" />
         <activity android:name=".activity_date" />
-        <activity android:name=".activity_edit"></activity>
+        <activity android:name=".activity_edit" />
+        <activity android:name=".activity_filter"></activity>
     </application>
 
 </manifest>
