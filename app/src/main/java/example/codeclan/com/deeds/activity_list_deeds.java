@@ -15,6 +15,7 @@ public class activity_list_deeds extends AppCompatActivity {
 
     DBHelper dbHelper;
     ArrayList<Deed> deedList;
+    String thisList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class activity_list_deeds extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.hasExtra("listMode")){
             Bundle extras = intent.getExtras();
+            thisList = extras.getString("listMode");
             switch (extras.getString("listMode")){
                 case "done":
                     deedList = Deed.allComplete(dbHelper);
@@ -51,6 +53,7 @@ public class activity_list_deeds extends AppCompatActivity {
     public void getDeed(View listItem){
         Deed deed = (Deed) listItem.getTag();
         Intent i = new Intent(this, activity_edit.class);
+        i.putExtra("listMode", thisList);
         i.putExtra("deedName", deed.getName());
         i.putExtra("deedDate", deed.getDate());
         i.putExtra("deedDetails", deed.getDetails());

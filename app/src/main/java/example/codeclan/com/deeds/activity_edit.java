@@ -18,6 +18,7 @@ public class activity_edit extends AppCompatActivity {
     RadioGroup completeButton;
     DBHelper dbHelper;
     private Integer id;
+    private String listMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class activity_edit extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         id = extras.getInt("id");
+        listMode = extras.getString("listMode");
         nameText.setText(extras.getString("deedName"));
         detailsText.setText(extras.getString("deedDetails"));
         selectedDate.setText(extras.getString("deedDate"));
@@ -54,6 +56,7 @@ public class activity_edit extends AppCompatActivity {
         Deed deed = new Deed(name, date, details, complete);
         deed.update(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
+        i.putExtra("listMode", listMode);
         startActivity(i);
     }
 
@@ -61,6 +64,7 @@ public class activity_edit extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         Deed.delete(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
+        i.putExtra("listMode", listMode);
         startActivity(i);
     }
 
