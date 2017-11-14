@@ -57,6 +57,8 @@ public class activity_edit extends AppCompatActivity {
         deed.update(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", listMode);
+        i.putExtra("selectedDate", date);
+        i.putExtra("complete", complete);
         startActivity(i);
     }
 
