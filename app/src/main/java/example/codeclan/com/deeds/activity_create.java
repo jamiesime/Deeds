@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
 public class activity_create extends AppCompatActivity {
 
     EditText nameText;
+    EditText detailsText;
+    TextView selectedDate;
     RadioGroup completeButton;
     DBHelper dbHelper;
 
@@ -22,23 +25,44 @@ public class activity_create extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         nameText = (EditText)findViewById(R.id.nameEdit);
+        selectedDate = (TextView)findViewById(R.id.selected_date);
         completeButton = (RadioGroup)findViewById(R.id.isComplete);
+        detailsText = (EditText)findViewById(R.id.detailEdit);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("deedName")) {
+            Bundle extras = intent.getExtras();
+            if (!extras.getString("deedName").equals(null)) {
+                nameText.setText(extras.getString("deedName"));
+                detailsText.setText(extras.getString("deedDetails"));
+                selectedDate.setText(extras.getString("dateInput"));
+            }
+        }
     }
 
     public void saveNewDeed(View button){
         dbHelper = new DBHelper(this);
         String name = nameText.getText().toString();
+        String date = selectedDate.getText().toString();
         String complete = "";
+        String details = detailsText.getText().toString();
         Integer rb = completeButton.getCheckedRadioButtonId();
         if (rb == findViewById(R.id.done).getId()){
-            complete = "true";
+            complete = "done";
         }
         else {
-            complete = "false";
+            complete = "not done";
         }
-        Deed deed = new Deed(name, complete);
+        Deed deed = new Deed(name, date, details, complete);
         deed.save(dbHelper);
         Intent i = new Intent(this, menu_activity.class);
+        startActivity(i);
+    }
+
+    public void goToDatePicker(View button){
+        Intent i = new Intent(this, activity_date.class);
+        i.putExtra("deedName", nameText.getText().toString());
+        i.putExtra("detailsName", detailsText.getText().toString());
         startActivity(i);
     }
 

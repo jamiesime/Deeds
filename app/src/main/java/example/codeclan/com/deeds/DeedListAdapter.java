@@ -25,10 +25,12 @@ public class DeedListAdapter extends ArrayAdapter<Deed> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.deed_list_item, parent, false);
         }
         Deed currentDeed = getItem(position);
-        TextView ranking = (TextView)listItemView.findViewById(R.id.deed_name);
-        ranking.setText(currentDeed.getName().toString());
-        TextView title = (TextView)listItemView.findViewById(R.id.deed_complete);
-        title.setText(currentDeed.getComplete().toString());
+        TextView name = (TextView)listItemView.findViewById(R.id.deed_name);
+        name.setText(currentDeed.getName().toString());
+        TextView date = (TextView)listItemView.findViewById(R.id.deed_date);
+        date.setText(currentDeed.getDate().toString());
+        TextView complete = (TextView)listItemView.findViewById(R.id.deed_complete);
+        complete.setText(currentDeed.getComplete().toString());
 
 
         listItemView.setTag(currentDeed);

@@ -8,6 +8,8 @@ import android.graphics.Movie;
 import java.util.ArrayList;
 
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_COMPLETE;
+import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_DATE;
+import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_DETAILS;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_ID;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_NAME;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_TABLE_NAME;
@@ -20,21 +22,35 @@ public class Deed {
 
     private Integer id;
     private String name;
+    private String date;
     private String complete;
+    private String details;
 
-    public Deed(String name, String complete) {
+    public Deed(String name, String date, String details, String complete) {
         this.name = name;
+        this.date = date;
+        this.details = details;
         this.complete = complete;
     }
 
-    public Deed(Integer id, String name, String complete) {
+    public Deed(Integer id, String name, String date, String details, String complete) {
         this.id = id;
         this.name = name;
+        this.date = date;
+        this.details = details;
         this.complete = complete;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getDetails(){
+        return details;
     }
 
     public String getComplete() {
@@ -45,6 +61,8 @@ public class Deed {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DEEDS_COLUMN_NAME, this.name);
+        cv.put(DEEDS_COLUMN_DATE, this.date);
+        cv.put(DEEDS_COLUMN_DETAILS, this.details);
         cv.put(DEEDS_COLUMN_COMPLETE, this.complete);
         db.insert(DEEDS_TABLE_NAME, null, cv);
 
@@ -59,8 +77,10 @@ public class Deed {
         while(cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(DEEDS_COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_NAME));
+            String date = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_DATE));
+            String details = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_DETAILS));
             String complete = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_COMPLETE));
-            Deed deed = new Deed(id, name, complete);
+            Deed deed = new Deed(id, name, date, details, complete);
             deeds.add(deed);
         }
         cursor.close();

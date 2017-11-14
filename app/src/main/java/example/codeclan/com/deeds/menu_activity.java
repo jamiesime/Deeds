@@ -7,10 +7,15 @@ import android.view.View;
 
 public class menu_activity extends AppCompatActivity {
 
+    DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_activity);
+
+        dbHelper = new DBHelper(this);
+
     }
 
     public void toNew(View button){
