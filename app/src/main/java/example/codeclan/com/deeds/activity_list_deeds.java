@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class activity_list_deeds extends AppCompatActivity {
 
     DBHelper dbHelper;
+    ArrayList<Deed> deedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +22,26 @@ public class activity_list_deeds extends AppCompatActivity {
         setContentView(R.layout.activity_list_deeds);
 
         dbHelper = new DBHelper(this);
-        ArrayList<Deed> deedList = Deed.all(dbHelper);
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("listMode")){
+            Bundle extras = intent.getExtras();
+            switch (extras.getString("listMode")){
+                case "done":
+                    deedList = Deed.allComplete(dbHelper);
+                    break;
+//                case "not done":
+//                    deedList = Deed.allNotComplete(dbHelper);
+//                    break;
+//                case "date":
+//                    String selectedDate = extras.getString("selectedDate");
+//                    deedList = Deed.getByDate(dbHelper, selectedDate);
+//                    break;
+                case "all":
+                    deedList = Deed.all(dbHelper);
+                    break;
+            }
+        }
 
         DeedListAdapter listAdapter = new DeedListAdapter(this, deedList);
         ListView listView = (ListView)findViewById(R.id.deed_list);

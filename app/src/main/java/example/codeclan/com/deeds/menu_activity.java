@@ -25,6 +25,12 @@ public class menu_activity extends AppCompatActivity {
 
     public void toView(View button){
         Intent i = new Intent(this, activity_list_deeds.class);
+        i.putExtra("listMode", "all");
+        startActivity(i);
+    }
+
+    public void toFilter(View button){
+        Intent i = new Intent(this, activity_filter.class);
         startActivity(i);
     }
 }

@@ -83,11 +83,28 @@ public class Deed {
         return true;
     }
 
-
     public static ArrayList<Deed> all(DBHelper dbHelper){
         ArrayList<Deed> deeds = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + DEEDS_TABLE_NAME, null);
+        cursor.moveToFirst();
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(DEEDS_COLUMN_ID));
+            String name = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_NAME));
+            String date = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_DATE));
+            String details = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_DETAILS));
+            String complete = cursor.getString(cursor.getColumnIndex(DEEDS_COLUMN_COMPLETE));
+            Deed deed = new Deed(id, name, date, details, complete);
+            deeds.add(deed);
+        }
+        cursor.close();
+        return deeds;
+    }
+
+    public static ArrayList<Deed> allComplete(DBHelper dbHelper){
+        ArrayList<Deed> deeds = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DEEDS_TABLE_NAME + " WHERE complete = ?", new String[]{"done"});
         cursor.moveToFirst();
         while(cursor.moveToNext()){
             int id = cursor.getInt(cursor.getColumnIndex(DEEDS_COLUMN_ID));
