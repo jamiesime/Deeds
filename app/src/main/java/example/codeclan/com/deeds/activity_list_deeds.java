@@ -16,6 +16,7 @@ public class activity_list_deeds extends nav {
     DBHelper dbHelper;
     ArrayList<Deed> deedList;
     String thisList;
+    String selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class activity_list_deeds extends nav {
                     thisList = "not done";
                     break;
                 case "date":
-                    String selectedDate = extras.getString("selectedDate");
+                    selectedDate = extras.getString("selectedDate");
                     deedList = Deed.getByDate(dbHelper, selectedDate);
                     thisList = "date";
                     break;
@@ -60,6 +61,7 @@ public class activity_list_deeds extends nav {
         i.putExtra("listMode", thisList);
         i.putExtra("deedName", deed.getName());
         i.putExtra("deedDate", deed.getDate());
+        i.putExtra("selectedDate", selectedDate);
         i.putExtra("deedDetails", deed.getDetails());
         i.putExtra("deedComplete", deed.getComplete());
         i.putExtra("id", deed.getId());
