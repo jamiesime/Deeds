@@ -14,11 +14,16 @@ import org.w3c.dom.Text;
 
 public class activity_create extends nav {
 
+    String recurringType;
+    Integer recurringValue;
+
     EditText nameText;
     EditText detailsText;
     TextView selectedDate;
     RadioGroup completeButton;
     DBHelper dbHelper;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,11 @@ public class activity_create extends nav {
         if (intent.hasExtra("deedDetails")) {
             Bundle extras = intent.getExtras();
             detailsText.setText(extras.getString("deedDetails"));
+        }
+        if (intent.hasExtra("recurring")){
+            Bundle extras = intent.getExtras();
+            recurringType = extras.getString("recurring");
+            recurringValue = extras.getInt("recurValue");
         }
 
 

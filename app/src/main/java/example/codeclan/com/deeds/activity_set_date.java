@@ -7,15 +7,20 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class activity_set_date extends AppCompatActivity {
 
     private DatePicker datePicker;
+    private TextView recurTimes;
     private String deedName;
     private String deedDetails;
     private String nextIntent;
     private Integer id;
     private String listMode;
+    private Integer recurTimesInt;
+    private Spinner recurring_dropdown;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,12 @@ public class activity_set_date extends AppCompatActivity {
         id = extras.getInt("id");
         nextIntent = extras.getString("nextIntent");
         listMode = extras.getString("listMode");
+
+        recurTimesInt = 0;
+        recurTimes = (TextView)findViewById(R.id.recur_times);
         datePicker = (DatePicker)findViewById(R.id.date_picker_recurring);
 
-        Spinner recurring_dropdown = (Spinner)findViewById(R.id.recurring_dropdown);
+        recurring_dropdown = (Spinner)findViewById(R.id.recurring_dropdown);
         String[] items = new String[]{"No", "Daily", "Weekly"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
         recurring_dropdown.setAdapter(adapter);
@@ -60,6 +68,8 @@ public class activity_set_date extends AppCompatActivity {
             i.putExtra("deedDate", selectedDate);
             i.putExtra("deedName", deedName);
             i.putExtra("deedDetails", deedDetails);
+            i.putExtra("recurring", recurring_dropdown.getSelectedItem().toString());
+            i.putExtra("recurValue", recurTimesInt);
             startActivity(i);
         }
         if (nextIntent.equals("filter")){
@@ -69,6 +79,13 @@ public class activity_set_date extends AppCompatActivity {
             startActivity(i);
         }
 
+    }
+
+    public void onUpArrow(View button){
+        if (recurTimesInt < 10){
+            recurTimesInt += 1;
+        }
+        recurTimes.setText("x" + recurTimesInt.toString());
     }
 
 
