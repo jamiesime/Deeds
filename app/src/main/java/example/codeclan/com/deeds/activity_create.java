@@ -12,10 +12,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class activity_create extends nav {
 
     String recurringType;
     Integer recurringValue;
+    ArrayList<String> recurringDates;
 
     EditText nameText;
     EditText detailsText;
@@ -34,6 +37,8 @@ public class activity_create extends nav {
         completeButton = (RadioGroup)findViewById(R.id.isComplete);
         detailsText = (EditText)findViewById(R.id.detailEdit);
 
+        recurringDates = new ArrayList<>();
+
         Intent intent = getIntent();
         if (intent.hasExtra("deedName")) {
             Bundle extras = intent.getExtras();
@@ -51,6 +56,10 @@ public class activity_create extends nav {
             Bundle extras = intent.getExtras();
             recurringType = extras.getString("recurring");
             recurringValue = extras.getInt("recurValue");
+            for (int n = 0 ; n < recurringValue ; n++){
+                String nextString = extras.getString(String.valueOf(n));
+                recurringDates.add(nextString);
+            }
         }
 
 
@@ -70,15 +79,14 @@ public class activity_create extends nav {
             complete = "not done";
         }
         Deed deed = new Deed(name, date, details, complete);
-
-//        if (recurringType.equals("Daily") && recurringValue > 1){
-//            deed.save();
-//            int times = recurringValue;
-//            for (int i = 0 ; i < times ; i++){
-//                 date = deed.getDate();
-//            }
-//        }
         deed.save(dbHelper);
+        if (recurringDates.size() > 0){
+            for (String thisDate : recurringDates){
+                deed.setDate(thisDate);
+                deed.save(dbHelper);
+            }
+
+        }
         Intent i = new Intent(this, menu_activity.class);
         startActivity(i);
     }
