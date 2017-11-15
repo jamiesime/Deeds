@@ -201,9 +201,11 @@ public class Deed {
             for (String date : dateList)
             {
                 for (Deed deed : deedsToSort){
-                    String firstDate = dateList.get(datePos);
-                    if (deed.getDate().equals(firstDate)){
-                        sortedDeeds.add(deed);
+                    String nextDate = dateList.get(datePos);
+                    if (deed.getDate().equals(nextDate)){
+                        if (!sortedDeeds.contains(deed)){
+                            sortedDeeds.add(deed);
+                        }
                         if (datePos < ( dateList.size() - 1)){
                             datePos++;
                         }
@@ -212,8 +214,6 @@ public class Deed {
             }
 
         return sortedDeeds;
-
-
     }
 
 
