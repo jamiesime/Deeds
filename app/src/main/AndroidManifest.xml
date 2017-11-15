@@ -22,6 +22,7 @@
         <activity android:name=".activity_edit" />
         <activity android:name=".activity_filter" />
         <activity android:name=".activity_info" />
+        <activity android:name=".activity_set_date"></activity>
     </application>
 
 </manifest>

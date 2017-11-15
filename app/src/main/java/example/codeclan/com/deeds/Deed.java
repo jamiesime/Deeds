@@ -128,6 +128,7 @@ public class Deed {
             deeds.add(deed);
         }
         cursor.close();
+        deeds = sortByDate(deeds);
         return deeds;
     }
 
@@ -145,6 +146,7 @@ public class Deed {
             deeds.add(deed);
         }
         cursor.close();
+        deeds = sortByDate(deeds);
         return deeds;
     }
 

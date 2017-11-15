@@ -2,7 +2,7 @@
     <string name="app_name">Deeds</string>
     <string name="list_title">all deeds</string>
     <string name="create_info"> Create deeds here with a name, date, completion and save.</string>
-    <string name="list_info">View all saved deeds. Click on a deed to update or delete.</string>
+    <string name="list_info">View all saved deeds, sorted by date. Tap to edit/delete/review.</string>
     <string name="filter_info">Filter what deeds to view via criteria, ie date.</string>
     <string name="info_blurb">deeds is a task list managing app. You can create, edit and filter search
         through your tasks using the interface explained below.</string>

@@ -66,7 +66,7 @@ public class activity_create extends nav {
     }
 
     public void goToDatePicker(View button){
-        Intent i = new Intent(this, activity_date.class);
+        Intent i = new Intent(this, activity_set_date.class);
         i.putExtra("deedName", nameText.getText().toString());
         i.putExtra("detailsName", detailsText.getText().toString());
         i.putExtra("nextIntent", "create");
