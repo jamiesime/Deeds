@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class menu_activity extends nav {
 
@@ -36,6 +40,18 @@ public class menu_activity extends nav {
 
     public void toInfo(View button){
         Intent i = new Intent(this, activity_info.class);
+        startActivity(i);
+    }
+
+    public void toDeedsToday(View button){
+        Calendar today = Calendar.getInstance();
+        Integer year = today.get(Calendar.YEAR);
+        Integer month = (today.get(Calendar.MONTH) + 1);
+        Integer day = today.get(Calendar.DAY_OF_MONTH);
+        String selectedDate = day.toString() + "-" + month.toString() + "-" + year.toString();
+        Intent i = new Intent(this, activity_list_deeds.class);
+        i.putExtra("listMode", "date");
+        i.putExtra("selectedDate", selectedDate);
         startActivity(i);
     }
 }

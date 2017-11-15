@@ -5,7 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Movie;
 
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Locale;
 
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_COMPLETE;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_DATE;
@@ -13,6 +23,8 @@ import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_DETAILS;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_ID;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_COLUMN_NAME;
 import static example.codeclan.com.deeds.DBHelper.DEEDS_TABLE_NAME;
+import static java.util.Collections.min;
+import static java.util.Collections.sort;
 
 /**
  * Created by user on 13/11/2017.
@@ -98,6 +110,7 @@ public class Deed {
             deeds.add(deed);
         }
         cursor.close();
+        deeds = sortByDate(deeds);
         return deeds;
     }
 
@@ -165,5 +178,38 @@ public class Deed {
         db.delete(DEEDS_TABLE_NAME, selection, values);
         return true;
     }
+
+    public static ArrayList<Deed> sortByDate(ArrayList<Deed> deedsToSort){
+        ArrayList<String> dateList = new ArrayList<String>();
+        for (Deed deed : deedsToSort){
+            dateList.add(deed.getDate());
+        }
+        Collections.sort(dateList, new Comparator<String>() {
+            DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            @Override
+            public int compare(String date1, String date2) {
+                try {
+                    return format.parse(date1).compareTo(format.parse(date2));
+                } catch (ParseException e) {
+                    throw new IllegalArgumentException(e);
+                }
+            }
+        });
+        ArrayList<Deed> sortedDeeds = new ArrayList<>();
+        int loopTimes = dateList.size();
+        for (int i = 0 ; i < (loopTimes - 1) ; i++){
+            for (Deed deed : deedsToSort)
+            {
+                String firstDate = dateList.get(i);
+                if (deed.getDate().equals(firstDate)){
+                    sortedDeeds.add(deed);
+                }
+            }
+        }
+        return sortedDeeds;
+
+
+    }
+
 
 }
