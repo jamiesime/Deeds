@@ -33,4 +33,9 @@ public class menu_activity extends nav {
         Intent i = new Intent(this, activity_filter.class);
         startActivity(i);
     }
+
+    public void toInfo(View button){
+        Intent i = new Intent(this, activity_info.class);
+        startActivity(i);
+    }
 }
