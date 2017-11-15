@@ -70,10 +70,20 @@ public class activity_create extends nav {
             complete = "not done";
         }
         Deed deed = new Deed(name, date, details, complete);
+
+//        if (recurringType.equals("Daily") && recurringValue > 1){
+//            deed.save();
+//            int times = recurringValue;
+//            for (int i = 0 ; i < times ; i++){
+//                 date = deed.getDate();
+//            }
+//        }
         deed.save(dbHelper);
         Intent i = new Intent(this, menu_activity.class);
         startActivity(i);
     }
+
+
 
     public void goToDatePicker(View button){
         Intent i = new Intent(this, activity_set_date.class);
