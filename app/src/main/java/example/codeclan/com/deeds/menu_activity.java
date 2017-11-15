@@ -30,6 +30,7 @@ public class menu_activity extends nav {
     public void toView(View button){
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", "all");
+        i.putExtra("listTitle", "all deeds");
         startActivity(i);
     }
 
@@ -51,6 +52,7 @@ public class menu_activity extends nav {
         String selectedDate = day.toString() + "-" + month.toString() + "-" + year.toString();
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", "date");
+        i.putExtra("listTitle", "today");
         i.putExtra("selectedDate", selectedDate);
         startActivity(i);
     }

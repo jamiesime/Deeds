@@ -6,4 +6,5 @@
     <string name="filter_info">Filter what deeds to view via criteria, ie date.</string>
     <string name="info_blurb">deeds is a task list managing app. You can create, edit and filter search
         through your tasks using the interface explained below.</string>
+    <string name="default_date">00-00-0000</string>
 </resources>

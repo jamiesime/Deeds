@@ -19,6 +19,7 @@ public class activity_edit extends nav {
     DBHelper dbHelper;
     private Integer id;
     private String listMode;
+    private String listTitle;
     private String dateToPass;
 
     @Override
@@ -38,6 +39,7 @@ public class activity_edit extends nav {
         nameText.setText(extras.getString("deedName"));
         detailsText.setText(extras.getString("deedDetails"));
         selectedDate.setText(extras.getString("deedDate"));
+        listTitle = extras.getString("listTitle");
 
 
 
@@ -60,6 +62,7 @@ public class activity_edit extends nav {
         deed.update(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", listMode);
+        i.putExtra("listTitle", listTitle);
         i.putExtra("selectedDate", dateToPass);
         i.putExtra("complete", complete);
         startActivity(i);
@@ -70,6 +73,7 @@ public class activity_edit extends nav {
         Deed.delete(dbHelper, id);
         Intent i = new Intent(this, activity_list_deeds.class);
         i.putExtra("listMode", listMode);
+        i.putExtra("listTitle", listTitle);
         i.putExtra("selectedDate", dateToPass);
         startActivity(i);
     }
@@ -81,6 +85,7 @@ public class activity_edit extends nav {
         i.putExtra("detailsName", detailsText.getText().toString());
         i.putExtra("id", id);
         i.putExtra("listMode", listMode);
+        i.putExtra("listTitle", listTitle);
         i.putExtra("nextIntent", "edit");
         startActivity(i);
     }

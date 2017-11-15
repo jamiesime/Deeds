@@ -19,6 +19,7 @@ public class activity_date extends nav {
     private String nextIntent;
     private Integer id;
     private String listMode;
+    private String listTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class activity_date extends nav {
         id = extras.getInt("id");
         nextIntent = extras.getString("nextIntent");
         listMode = extras.getString("listMode");
+        listTitle = extras.getString("listTitle");
 
 
 
@@ -45,6 +47,7 @@ public class activity_date extends nav {
         if (nextIntent.equals("edit")) {
             Intent i = new Intent(this, activity_edit.class);
             i.putExtra("listMode", listMode);
+            i.putExtra("listTitle", listTitle);
             i.putExtra("deedDate", selectedDate);
             i.putExtra("deedName", deedName);
             i.putExtra("deedDetails", deedDetails);
@@ -62,6 +65,7 @@ public class activity_date extends nav {
         if (nextIntent.equals("filter")){
             Intent i = new Intent(this, activity_list_deeds.class);
             i.putExtra("listMode", listMode);
+            i.putExtra("listTitle", "deeds on " + selectedDate);
             i.putExtra("selectedDate", selectedDate);
             startActivity(i);
         }
