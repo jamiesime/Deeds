@@ -197,15 +197,20 @@ public class Deed {
         });
         ArrayList<Deed> sortedDeeds = new ArrayList<>();
         int loopTimes = dateList.size();
-        for (int i = 0 ; i < (loopTimes - 1) ; i++){
-            for (Deed deed : deedsToSort)
+        int datePos = 0;
+            for (String date : dateList)
             {
-                String firstDate = dateList.get(i);
-                if (deed.getDate().equals(firstDate)){
-                    sortedDeeds.add(deed);
+                for (Deed deed : deedsToSort){
+                    String firstDate = dateList.get(datePos);
+                    if (deed.getDate().equals(firstDate)){
+                        sortedDeeds.add(deed);
+                        if (datePos < ( dateList.size() - 1)){
+                            datePos++;
+                        }
+                    }
                 }
             }
-        }
+
         return sortedDeeds;
 
 
