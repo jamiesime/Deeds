@@ -2,5 +2,3 @@ Deeds is a simple task list managing app written in Java using Android Studio. T
 Deeds can be set to recur over a period or weeks or days, and reviewed by date and completion status.
 
 ![alt text](https://github.com/jamiesime/Deeds/blob/master/concept.png)
-
-https://github.com/jamiesime/Deeds/blob/master/concept.png
